@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <title>Sheetsee Chart Demo</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'/>
+    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js'></script>
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,900,400italic|Source+Code+Pro:400' rel='stylesheet' type='text/css'>
+    <script type='text/javascript' src='./tabletop.js'></script>
+    <script type='text/javascript' src='./js/sheetsee.js'></script>
+    <link rel='stylesheet' type='text/css' href='./style.css'>
+  </head>
+
+  <style>
+    #pennies.axis {shape-rendering: crispEdges;}
+    #pennies.x.axis .minor, #pennies.y.axis .minor {stroke-opacity: .5;}
+    #pennies.x.axis {stroke-opacity: 1;}
+    #pennies.y.axis line, #pennies.y.axis path, #pennies.x.axis path {fill: none; stroke: #acacac; stroke-width: 1;}
+    #pennies .x.axis line {stroke: #acacac; stroke-opacity: .75;}
+    .bigg {-webkit-transition: all .2s ease-in-out; -webkit-transform: scale(2);}
+    path.chartLine {stroke: #14ECC8; stroke-width: 3; fill: none;}
+    #pennies div.tooltip {position: absolute; text-align: left; padding: 4px 8px; width: auto; font-size: 10px; height: auto; background: #fff; border: 0px; pointer-events: none; font-family: Helvetica, Arial, sans-serif;}
+    circle {fill: #fff; cursor: pointer;}
+    path.domain {fill: #CCF4FF;}
+  </style>
+
+<body>
+  <div class="container">
+    <h1>Green Button Demo</h1>
+    <p><em><a href="https://docs.google.com/a/delta-institute.org/spreadsheets/d/10OBStN-rKjdH9uwTNiNEkaLl16cJMy6SFjTg4OvXp-k/edit?usp=sharing" target="_blank">spreadsheet</a></em></p>
+    <div id="pennies"></div>
+    <p><em><a onClick='window.location="view-source:" + window.location.href'>View Source</a> // <a href="../docs/sheetsee-charts.html">View Documentation</a></em></p>
+  </div>
+
+  <script type="text/javascript">
+   document.addEventListener('DOMContentLoaded', function() {
+   	var URL = "10OBStN-rKjdH9uwTNiNEkaLl16cJMy6SFjTg4OvXp-k"
+  		Tabletop.init( { key: URL, callback: showInfo, simpleSheet: true } )
+  	})
+
+    function showInfo(data) {
+      var cali = Sheetsee.getOccurance(data, "DATE")
+      var colors = ['#ff00ff', '#acacac']
+      var caliData = Sheetsee.makeColorArrayOfObject(cali, colors)
+      var lineOptions = { units: "units",
+                          labels: "undefined",
+                          m: [80, 100, 120, 100],
+                          w: 800, h: 400,
+                          div: "#pennies",
+                          yaxis: "pennies",
+                          hiColor: "#E4EB29"
+                        }
+      Sheetsee.d3LineChart(caliData, lineOptions)
+    }
+  </script>
+
+  </body>
+</html>
