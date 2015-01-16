@@ -23,13 +23,13 @@
   function init() {
     Tabletop.init( { key: public_spreadsheet_url,
                      callback: showInfo,
-                     simpleSheet: false } )
+                     simpleSheet: true } )
   }
 
   function showInfo(data, tabletop) {
     alert("Successfully processed!")
     console.log(data)
-    document.getElementById("name").innerHTML = "<strong>Dates:</strong> " + [ data[0].USAGE, data[1].DATE, data[2].DATE ].join(", ");
+    document.getElementById("name").innerHTML = "<strong>Dates:</strong> " + [ data[0].usage, data[1].date, data[2].date ].join(", ");
     //document.write(data);
   }
 </script>
